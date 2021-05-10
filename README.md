@@ -1,5 +1,6 @@
 # MSDS498-FakeNewsDetectorUsing URL as Input
 Simple Flask web application for fake news detection. Intended to run on Google Cloud Run while storing prediction results on Google BigQuery.
+https://github.com/FelipeAdachi/fake-news-deploy 
 # Tracking ML experiments with S3 and W&B to train text classification models for fake news detection.
 
 The goal is to have a fully traceable ML Experiment: code, train/test data, models and performance metrics, through different stages: preprocessing, grid search optimization and training final models. Google Cloud Platform, BigQuery, Flask, and pipeline and repository GitHub. 
