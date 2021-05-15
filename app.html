@@ -1,0 +1,10 @@
+@app.route('/', method = ['GET', 'POST'])
+def index():
+    foodList = [ i.type for i in db.session.query(FoodType)]
+    return render_template('main.html', food=foodList)
+
+@app.route(/foodkind', method = ['GET', 'POST'])
+def foodkind():
+        selection = request.form['foodChoice']
+        foodKind = [ i.kind for i in db.session.query(FoodType).filter(FoodKind == selection)]
+        return render_template('main.html', foodChoice = foodKind)
