@@ -1,13 +1,11 @@
 # MSDS498-FakeNewsDetectorUsing URL as Input
-Simple Flask web application for fake news detection. Run on Google Cloud Run and then storing the prediction results on Google BigQuery.
-# 
-from google.cloud import bigquery
-import os
-import datetime
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'creds.json'
-
-
-client = bigquery.Client()
+This is a Simple Flask web application for fake news detection. Run on Google Cloud Run and then storing the prediction results on Google BigQuery. Google Cloud Platform, BigQuery, Flask, and GitHub.
+## The application will
+1. The input is read  from the URL entered on the front-end Web App 'Search Box' and the user clicks 'Submit'. 
+2.The text context is pre-process, vectorize, and transform to the tf-idf representation format.
+3. This leads to the prediction for a fake or real URL link (news link). 
+4. The result is updated/nserted as a prediction to the data table stored in BigQuery for further analyisis. This can be used (but not demoed here) as an analytics set. 
+5. The results are then displayed to the user. 
 
 # The the table BigQuery to store predictions 
 Table schema
@@ -34,8 +32,8 @@ table = bigquery.Table(table_id, schema=schema)
 table = client.create_table(table)  # API request
 print(
     "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
-# 
-fully traceable ML Experiment: code, train/test data, models and performance metrics, through different stages: preprocessing, grid search optimization and training final models. Google Cloud Platform, BigQuery, Flask, and pipeline and repository GitHub.
+# The Data set
+The data set comes from a Kaggle data set  https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset 
 https://github.com/FelipeAdachi/fake-news-deploy 
 
 
@@ -66,3 +64,5 @@ Once the type of model and appropriate text preprocessing is defined, the final 
 python -m src.retrain.assert_commit_retrain
 
 The retraining script assumes the existence of required infrastructure. Check the full explanation here
+# References
+To make the model run efficiently, I used code (or borrowed code) from this GitHub account: https://github.com/FelipeAdachi/fake-news-deploy 
