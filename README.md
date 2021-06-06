@@ -1,9 +1,43 @@
 # MSDS498-FakeNewsDetectorUsing URL as Input
-Simple Flask web application for fake news detection. Intended to run on Google Cloud Run while storing prediction results on Google BigQuery.
-https://github.com/FelipeAdachi/fake-news-deploy 
-# Tracking ML experiments with S3 and W&B to train text classification models for fake news detection.
+Simple Flask web application for fake news detection. Run on Google Cloud Run and then storing the prediction results on Google BigQuery.
+# 
+from google.cloud import bigquery
+import os
+import datetime
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'creds.json'
 
-The goal is to have a fully traceable ML Experiment: code, train/test data, models and performance metrics, through different stages: preprocessing, grid search optimization and training final models. Google Cloud Platform, BigQuery, Flask, and pipeline and repository GitHub. 
+
+client = bigquery.Client()
+
+# The the table BigQuery to store predictions 
+Table schema
+title: The title of the news
+content: The text content of the news
+model: The name of the model that yielded the prediction
+prediction: Prediction results: real or fake
+confidence: The prediction’s probability, denoting the model’s confidence in its prediction
+url: The URL of the original news article
+prediction_date: The date and time of when the prediction was made
+## code 
+table_id = 'sunny-emissary-293912.fakenewsdeploy.model_predictions'
+schema = [
+    bigquery.SchemaField("title", "STRING", mode="REQUIRED"),
+    bigquery.SchemaField("content", "STRING", mode="REQUIRED"),
+    bigquery.SchemaField("model", "STRING", mode="REQUIRED"),
+    bigquery.SchemaField("prediction", "STRING", mode="REQUIRED"),
+    bigquery.SchemaField("confidence", "FLOAT", mode="REQUIRED"),
+    bigquery.SchemaField("url", "STRING", mode="REQUIRED"),
+    bigquery.SchemaField("prediction_date", "DATETIME", mode="REQUIRED"),
+
+]
+table = bigquery.Table(table_id, schema=schema)
+table = client.create_table(table)  # API request
+print(
+    "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
+# 
+fully traceable ML Experiment: code, train/test data, models and performance metrics, through different stages: preprocessing, grid search optimization and training final models. Google Cloud Platform, BigQuery, Flask, and pipeline and repository GitHub.
+https://github.com/FelipeAdachi/fake-news-deploy 
+
 
 # Uploading Dataset
 From the projects root folder:
