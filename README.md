@@ -34,8 +34,6 @@ print(
     "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
 # The Data set
 The data set comes from a Kaggle data set  https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset 
-https://github.com/FelipeAdachi/fake-news-deploy 
-
 
 # Uploading Dataset
 From the projects root folder:
