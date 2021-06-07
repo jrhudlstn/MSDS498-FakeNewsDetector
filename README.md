@@ -2,10 +2,16 @@
 This is a Simple Flask web application for fake news detection. Run on Google Cloud Run and then storing the prediction results on Google BigQuery. Google Cloud Platform, BigQuery, Flask, and GitHub.
 ## The application will
 1. The input is read  from the URL entered on the front-end Web App 'Search Box' and the user clicks 'Submit'. 
-2.The text context is pre-process, vectorize, and transform to the tf-idf representation format.
-3. This leads to the prediction for a fake or real URL link (news link). 
-4. The result is updated/nserted as a prediction to the data table stored in BigQuery for further analyisis. This can be used (but not demoed here) as an analytics set. 
-5. The results are then displayed to the user. 
+2. ![image](https://user-images.githubusercontent.com/6859309/120953679-1d036580-c713-11eb-8009-95ed46bfa3c0.png)
+Results
+![image](https://user-images.githubusercontent.com/6859309/120953747-4a501380-c713-11eb-8006-39fd93c8e762.png)
+
+3.The text context is pre-process, vectorize, and transform to the tf-idf representation format.
+4. This leads to the prediction for a fake or real URL link (news link). 
+5. The result is updated/nserted as a prediction to the data table stored in BigQuery for further analyisis. This can be used (but not demoed here) as an analytics set. 
+6. The results are then displayed to the user. 
+# Architecture
+![image](https://user-images.githubusercontent.com/6859309/120954919-d4997700-c715-11eb-91fa-20b7d1f3d886.png)
 
 # The the table BigQuery to store predictions 
 Table schema
@@ -35,24 +41,12 @@ print(
 # The Data set
 The data set comes from a Kaggle data set  https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset 
 
-# Uploading Dataset
-From the projects root folder:
+# Upload the Dataset
+Upload to the project root folder by GCP python -m src.data.upload_dataset
+Adding to the external data located at data/external into a dataframe and split into train/test dataset.
 
-python -m src.data.upload_dataset
-
-This will get external data located at data/external, properly assemble it into a dataframe and split into train/test dataset.
-
-The x/y train-test splits are then uploaded to an S3 bucket, and logged as artifacts at W&B, using references to the bucket. Metadata is included to link bucket versionIDs to the W&B artifacts.
-
-# Grid Search Optimization
-wandb sweep src/models/sweep.yaml
-
-then run sweep agent given, e.g.
-
-wandb agent felipeadachi/fn_experiments/<sweep_id>
-
-This runs a grid search hyperparameter tuning, in order to assess performance for differente sklearn models, such as sdg, svm, random forest and multionomial naive-bayes. An additional parameter related to a text preprocessing step is included, to assess the impact of denoising the text.
-
+# The model is built from several online/we site/GitHub training ML Prediction Fake News Dector 
+Several published models are combined here. 
 # Train Final Model
 python -m src.models.train_final
 
