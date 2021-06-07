@@ -51,10 +51,8 @@ Several published models are combined here.
 python -m src.models.train_final
 
 Once the type of model and appropriate text preprocessing is defined, the final model is trained, classification reports and confusion matrix is logged to W&B, joblib model is saved to S3 bucket and referenced to W&B.
+# PowerPoint Slides
+[Huddleston_IndividualProject_MSDS498_Spring2021.pptx](https://github.com/jrhudlstn/MSDS498-FakeNewsDetector/files/6605678/Huddleston_IndividualProject_MSDS498_Spring2021.pptx)
 
-# Retrain Model
-python -m src.retrain.assert_commit_retrain
-
-The retraining script assumes the existence of required infrastructure. Check the full explanation here
 # References
 To make the model run efficiently, I used code (or borrowed code) from this GitHub account: https://github.com/FelipeAdachi/fake-news-deploy 
